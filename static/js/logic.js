@@ -23,3 +23,15 @@ function createFeatures(earthquakeData) {
             "</h3><hr><p>" + new Date(feature.properties.time) + "</p>");
     }
 
+    var EQ = L.geoJSON(earthquakeData, {
+        pointToLayer: function (feature, location) {
+            return new L.circle(location,
+                {
+                    radius: size(feature.properties.mag)
+                    , fillColor: color(feature.geometry.coordinates[2])
+                    , fillOpacity: .1
+                    , color: "Purple"
+                    , stroke: true
+                    , weight: 1
+                })
+        }
