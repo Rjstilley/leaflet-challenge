@@ -55,7 +55,7 @@ function createMap(EQ) {
     var overlayMaps = {
         Earthquakes: EQ
     };
-    var BeccaMap = L.map("mapid", {
+    var myMap = L.map("BeccaMap", {
         center: [
             37.09, -95.71
         ],
@@ -64,5 +64,5 @@ function createMap(EQ) {
     });
     L.control.layers(baseMaps, overlayMaps, {
         collapsed: false
-    }).addTo(BeccaMap);
+    }).addTo(myMap);
 }
