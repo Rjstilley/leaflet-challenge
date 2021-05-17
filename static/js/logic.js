@@ -48,3 +48,21 @@ function createMap(EQ) {
         id: "mapbox/streets-v11",
         accessToken: API_KEY
     });
+    var baseMaps = {
+        "Street Map": streetmap,
+        "Dark Map": darkmap
+    };
+    var overlayMaps = {
+        Earthquakes: EQ
+    };
+    var BeccaMap = L.map("mapid", {
+        center: [
+            37.09, -95.71
+        ],
+        zoom: 5,
+        layers: [viewStreet, EQ]
+    });
+    L.control.layers(baseMaps, overlayMaps, {
+        collapsed: false
+    }).addTo(BeccaMap);
+}
