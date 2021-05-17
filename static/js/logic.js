@@ -1,28 +1,25 @@
-eQuake = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_hour.geojson"
-API_KEY = "pk.eyJ1IjoiYmVuamFtZW5hbGZvcmQiLCJhIjoiY2p2NWg5enJkMHVyMzQ0bWtmY2FtNmM5bCJ9.mFsGlikCvtB_-6xIFCVPiQ"
 
+eQuake = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson"
+API_KEY = "pk.eyJ1IjoiYnJvb2thbm4iLCJhIjoiY2tvcDI5ZzQ4MDF6eTJxbGM0YzJ6d3N3YiJ9.UPSAHkGUAQB4nJo0NnXv9g"
 d3.json(eQuake).then(function (data) {
     createFeatures(data.features);
 });
 function size(Strength) {
     return Strength * 30000
 }
-
-function color(how_deep) {
-    if (how_deep > 90) return "red"
-    else if (how_deep > 70) return "dark orange"
-    else if (how_deep > 50) return "orange"
-    else if (how_deep > 30) return "yellow"
-    else if (how_deep > 10) return "lime green"
+function color(Deep) {
+    if (Deep > 90) return "red"
+    else if (Deep > 70) return "dark orange"
+    else if (Deep > 50) return "orange"
+    else if (Deep > 30) return "yellow"
+    else if (Deep > 10) return "lime green"
     else return "green"
 }
-
 function createFeatures(earthquakeData) {
     function onEachFeature(feature, layer) {
         layer.bindPopup("<h3>" + feature.properties.place +
             "</h3><hr><p>" + new Date(feature.properties.time) + "</p>");
     }
-
     var EQ = L.geoJSON(earthquakeData, {
         pointToLayer: function (feature, location) {
             return new L.circle(location,
@@ -30,7 +27,7 @@ function createFeatures(earthquakeData) {
                     radius: size(feature.properties.mag)
                     , fillColor: color(feature.geometry.coordinates[2])
                     , fillOpacity: .1
-                    , color: "Purple"
+                    , color: "tan"
                     , stroke: true
                     , weight: 1
                 })
@@ -54,20 +51,19 @@ function createMap(EQ) {
         id: "dark-v10",
         accessToken: API_KEY
     });
-
     var baseMaps = {
         "Street Map": streetmap,
         "Dark Map": darkmap
     };
     var overlayMaps = {
-        Earthquakes: EQ
+        EQ: EQ
     };
     var myMap = L.map("BeccaMap", {
         center: [
             37.09, -95.71
         ],
         zoom: 5,
-        layers: [viewStreet, EQ]
+        layers: [streetmap, EQ]
     });
     L.control.layers(baseMaps, overlayMaps, {
         collapsed: false
