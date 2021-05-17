@@ -7,3 +7,13 @@ d3.json(eQuake).then(function (data) {
 function size(Strength) {
     return Strength * 30000
 }
+
+function color(how_deep) {
+    if (Depth > 90) return "red"
+    else if (how_deep > 70) return "dark orange"
+    else if (how_deep > 50) return "orange"
+    else if (how_deep > 30) return "yellow"
+    else if (how_deep > 10) return "lime green"
+    else return "green"
+}
+
