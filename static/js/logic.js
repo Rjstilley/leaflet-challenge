@@ -17,3 +17,9 @@ function color(how_deep) {
     else return "green"
 }
 
+function createFeatures(earthquakeData) {
+    function onEachFeature(feature, layer) {
+        layer.bindPopup("<h3>" + feature.properties.place +
+            "</h3><hr><p>" + new Date(feature.properties.time) + "</p>");
+    }
+
