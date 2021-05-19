@@ -1,6 +1,6 @@
 
 eQuake = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson"
-API_KEY = "pk.eyJ1IjoiYnJvb2thbm4iLCJhIjoiY2tvcDI5ZzQ4MDF6eTJxbGM0YzJ6d3N3YiJ9.UPSAHkGUAQB4nJo0NnXv9g"
+// API_KEY = "pk.eyJ1IjoiYnJvb2thbm4iLCJhIjoiY2tvcDI5ZzQ4MDF6eTJxbGM0YzJ6d3N3YiJ9.UPSAHkGUAQB4nJo0NnXv9g"
 d3.json(eQuake).then(function (data) {
     createFeatures(data.features);
 });
@@ -8,8 +8,8 @@ function size(Strength) {
     return Strength * 30000
 }
 function color(Deep) {
-    if (Deep > 90) return "red"
-    else if (Deep > 70) return "dark orange"
+    if (Deep > 90) return "rebeccapurple"
+    else if (Deep > 70) return "red"
     else if (Deep > 50) return "orange"
     else if (Deep > 30) return "yellow"
     else if (Deep > 10) return "lime green"
@@ -27,7 +27,7 @@ function createFeatures(earthquakeData) {
                     radius: size(feature.properties.mag)
                     , fillColor: color(feature.geometry.coordinates[2])
                     , fillOpacity: .1
-                    , color: "tan"
+                    , color: "light purple"
                     , stroke: true
                     , weight: 1
                 })
